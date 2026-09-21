@@ -40,6 +40,7 @@ class CLTTrainingRunnerConfig(BaseModel):
     normalize_decoder: bool = False
     
     # -----ActivationStore Parameters---------
+    hook_name_in: str = "ln2.hook_normalized" # per-block CLT input hook, e.g. "hook_resid_mid"
     context_size: int = 32
     n_batches_in_buffer: int = 20 # buffer_size = n_batches_in_buffer * store_batch_size_prompts * context_size (for on the fly loading)
     store_batch_size_prompts: int = 32

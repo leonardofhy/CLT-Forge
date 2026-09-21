@@ -80,7 +80,8 @@ class ActivationsStore:
         self.n_train_batch_per_buffer = cfg.n_train_batch_per_buffer
 
         self.N_layers = model.cfg.n_layers
-        self.hook_names_in  = [f"blocks.{i}.ln2.hook_normalized"  for i in range(self.N_layers)]
+        hook_name_in = getattr(cfg, "hook_name_in", "ln2.hook_normalized")  # AutoInterpConfig has no such field
+        self.hook_names_in  = [f"blocks.{i}.{hook_name_in}"  for i in range(self.N_layers)]
         self.hook_names_out = [f"blocks.{i}.hook_mlp_out" for i in range(self.N_layers)]
 
         if self.cfg.cached_activations_path is None: 
